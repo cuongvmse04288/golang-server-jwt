@@ -1,0 +1,6 @@
+sql:
+  username: root
+  password: 123456
+  db-name: localhost:3306
+jwt:
+  signing-key: IamGey
