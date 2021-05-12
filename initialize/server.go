@@ -5,14 +5,13 @@ import (
 	"golang-demo/controller"
 )
 
-
 func Routers() *gin.Engine {
 	r := gin.Default()
 	r.Use(gin.Recovery())
 	authorized := r.Group("/")
 	{
-		authorized.POST("/login",controller.LoginHandler)
+		authorized.POST("/login", controller.LoginHandler)
+		authorized.POST("/home", controller.HomeHandler)
 	}
 	return r
 }
-

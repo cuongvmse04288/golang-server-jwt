@@ -3,4 +3,10 @@ sql:
   password: 123456
   db-name: localhost:3306
 jwt:
-  signing-key: IamGey
+  # if using rsa, support file path to private key and public key
+  using-rsa: true
+  #rsa authentication
+  private-key-path: "rsa/app.rsa"
+  public-key-path: "rsa/app.rsa.pub"
+  #hsa authentication
+  signing-key: "demo"

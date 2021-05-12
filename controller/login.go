@@ -1,29 +1,24 @@
 package controller
 
 import (
-	"fmt"
 	"github.com/gin-gonic/gin"
 	"golang-demo/model/request"
+	"golang-demo/model/response"
 	"golang-demo/service"
-	"log"
 )
 
-func LoginHandler(c *gin.Context){
-	var l request.User
-	err := c.ShouldBindJSON(&l)
+func LoginHandler(c *gin.Context) {
+	var user request.User
+	err := c.ShouldBindJSON(&user)
 	if err != nil {
-		log.Print(err)
-	}
-	fmt.Println()
-	token,err := service.GenerateJWT(l)
-	if err != nil {
-		c.JSON(500,gin.H{
-			"error":err.Error(),
-		})
+		response.ResponseWithError(500, err, c)
 		return
 	}
-	c.JSON(200,gin.H{
-		"jwt":token,
-		"expiredIn":3600,
-	})
+
+	token, err := service.GenerateJWT(user, c)
+	if err != nil {
+		response.ResponseWithError(500, err, c)
+		return
+	}
+	response.ResponseWithToken(200, token, c)
 }

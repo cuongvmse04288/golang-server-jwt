@@ -1,11 +1,15 @@
 package main
 
-import "golang-demo/initialize"
+import (
+	"golang-demo/initialize"
+	"log"
+)
 
-func main()  {
+func main() {
 	r := initialize.Routers()
-	r.Run(":8080")
+	err := r.Run(":8080")
+	if err != nil {
+		log.Fatal(err)
+	}
+
 }
-
-
-
